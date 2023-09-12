@@ -266,7 +266,6 @@ class Mosaic(BaseMixTransform):
         final_labels['cls'] = final_labels['cls'][good]
         return final_labels
 
-
 class MixUp(BaseMixTransform):
 
     def __init__(self, dataset, pre_transform=None, p=0.0) -> None:
@@ -320,7 +319,8 @@ class RandomPerspective:
         # Rotation and Scale
         R = np.eye(3, dtype=np.float32)
         a = random.uniform(-self.degrees, self.degrees)
-        # a += random.choice([-180, -90, 0, 90])  # add 90deg rotations to small rotations
+        a += random.choice([-180, -90, 0, 90])  # add 90deg rotations to small rotations
+        # print('change rotation to', a)
         s = random.uniform(1 - self.scale, 1 + self.scale)
         # s = 2 ** random.uniform(-scale, scale)
         R[:2] = cv2.getRotationMatrix2D(angle=a, center=(0, 0), scale=s)
